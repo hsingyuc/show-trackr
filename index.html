@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Show Trackr</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+        <style>
+        html {
+            box-sizing: border-box;
+        }
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        body {
+            font-family: Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        .container {
+            width: 1180px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .font-bigger {
+            font-size: 21px;
+            font-weight: 400; 
+            line-height: 1.5;
+        }
+        p {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .font-smaller {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 12px 24px;
+            background: #540CFA;
+            box-shadow: rgba(60, 9, 179, 0.3) 0 2px 4px 0;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            font-size: 16px;
+        }
+        /* nav menu */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 20;
+            background: white;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+            font-size: 14px;
+            height: 50px;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar .logo {
+            font-size: 18px;
+        }
+        .navbar .logo span {
+            color: #540CFA;
+        }
+        .navbar-menu {
+            display: flex;
+        }
+        .navbar-menu .navbar-item {
+            margin: 0 29px;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-actions .navbar-item {
+            margin: 0 15px;
+        }
+        .navbar-actions .navbar-item:last-child {
+            margin: 0;
+        }
+        .navbar-item .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        /* intro section */
+        .intro-section {
+            margin-top: 185px;
+            overflow: hidden;
+            padding-bottom: 50px;
+        }
+        .intro-square {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(-135deg, #32FBFC, #3214F2 );
+            border-radius: 40px;
+            opacity: .9;
+            position: absolute;
+            right: 100%;
+            top: 300px;
+            transform: translateX(40%) rotate(-45deg);
+            transform-origin: bottom right;
+        }
+        .intro-square-orange {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(#F2C314, #FC3832 );
+            left: 100%;
+            transform: translateX(-28%) rotate(-20deg);
+            transform-origin: bottom left;
+            top: -170px;
+        }
+        .intro-square-purple {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(#9C09DB, #1C0FD7 );
+            left: 100%;
+            transform: rotate(-45deg);
+            transform-origin: bottom left;
+            z-index: 2;
+            top: -140px;
+        }
+        .intro-info {
+            float: left;
+            width: 60%;
+        }
+        .intro-section h1 {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+        .intro-section .font-bigger {
+            width: 82%;
+            margin-bottom: 30px;
+        }
+        .intro-info .font-icon {
+            font-weight: lighter;
+            opacity: 0.3;
+            font-size: 12px;
+        }
+        .email-wrapper {
+            max-width: 450px;
+            box-shadow: rgba(0, 0, 0, 0.5) 0 6px 12px 0, rgba(0, 0, 0, 0.5) 0 1px 2px 0;
+            display: flex;
+            border-radius: 4px;
+            margin-bottom: 130px;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        .email-input {
+            flex-grow: 0.8;
+            padding: 10px;
+        }
+        .email-input label {
+            display: block;
+            width: 100%;
+            color: #540CFA;
+            font-size: 12px;
+        }
+        .email-input input {
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        .email-input input::placeholder {
+            opacity: 0.3;
+        }
+        .email-wrapper input {
+            border-radius: 0;
+        }
+        .intro-img {
+            float: left;
+            width: 40%;
+        }
+        .intro-img img {
+            max-width: 100%;
+        }
+        .compatible-icons {
+            display: flex;
+            justify-content: space-between;
+            width: 421px;
+            opacity: .3;
+        }
+        .compatible-icons svg path,
+        .compatible-icons svg g {
+            fill: gray;
+        }
+
+        /* features-section */
+        .features-section {
+            text-align: center;
+        }
+        .features-info h2 {
+            font-size: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .features-info p {
+            max-width: 610px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 80px;
+        }
+        .customized-items {
+            display: flex;
+            justify-content: space-between;
+        }
+        .customized-items h4 {
+            font-size: 18px;
+        }
+        .customized-items p {
+            opacity: 0.7;
+            max-width: 300px;
+        }
+        .customized-item-icon {
+            background: black;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .learn-more {
+            color: #540CFA;
+        }
+        .customized-item-machine-learning .customized-item-icon {
+            background: linear-gradient(135deg, #F2C314,#FC3832);
+        }
+        .customized-item-automated-tracking .customized-item-icon {
+            background: linear-gradient(135deg, #9C09DB,#1C0FD7);
+        }
+        .customized-item-smart-notifications .customized-item-icon {
+            background: linear-gradient(135deg, #32FBFC,#3214F2);
+        }
+        .movie-slides {
+            display: flex;
+            padding: 140px 0;
+        }
+
+        /* interface section */
+        .interface-intro h2 {
+            font-size: 46px;
+            font-weight: 400;
+            max-width: 460px;
+            line-height: 1;
+        }
+        .interface-intro p {
+            max-width: 460px;
+            margin-bottom: 57px;
+        }
+        .interface-intro-btn {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 17px;
+            max-width: 340px;
+            opacity: 0.5;
+            transition: all .2s ease-in-out;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        @media (max-width: 768px) {
+            .interface-intro-btn {
+                max-width: auto;
+            }
+        }
+        .interface-intro-btn svg {
+            margin-right: 20px;
+            width: 20px;
+            height: 20px;
+        }
+        .interface-intro-btn:hover {
+            opacity: 1;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.05) 0 1px 2px 0;
+        }
+        .interface-intro {
+            float: left;
+            width: 42%;
+            margin-right:9%
+        }
+        .interface-img {
+            float: left;
+            width: 49%;
+            position: relative;
+        }
+        .interface-img-iphone {
+            position: relative;
+            z-index: 2;
+            left: 0;
+            margin-top: 100px;
+        }
+        .interface-img-web {
+            position: absolute;
+            top: -48px;
+            left: 88px;
+            z-index: 1;
+        }
+        .interface-section {
+            overflow: hidden;
+            padding-bottom: 100px;
+        }
+
+        /* community */
+        .community-section {
+            color: white;
+            background-image: url(testimonials.png);
+            background-color: black;
+            background-repeat: no-repeat;
+            background-position-x: 725px;
+        }
+        .community-intro {
+            padding-top: 200px;
+            padding-bottom: 200px;
+            max-width: 460px;
+        }
+        .community-intro h2 {
+            font-size: 46px;
+            font-weight: 400;
+            line-height: 1.08;
+        }
+        /* get started */
+        .get-started-section {
+            padding: 125px 0;
+        }
+        .get-started-section h2 {
+            font-size: 60px;
+            font-weight: 400;
+            max-width: 606px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .get-started-section p {
+            max-width: 520px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .get-started-section .email-wrapper {
+            margin: 0 auto;
+        }
+        
+        /* footer */
+
+        .social {
+            max-width: 120px;
+            margin: 0 auto;
+        }
+        .social a {
+            margin: 10px;
+            opacity: 0.2;
+            transition: all 0.2s ease-in-out;
+        }
+        .social a:hover {
+            opacity: 0.5;
+        }
+        .footer {
+            padding: 40px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="container">
+                <div class="logo">Show<span>Trackr</span></div>
+
+                <div class="navbar-menu">
+                    <div class="navbar-item">
+                        <a href="#features-section">Features</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#community-section">Community</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#get-started-section">Get Started</a>
+                    </div>
+                </div>
+
+                <div class="navbar-actions">
+                    <div class="navbar-item">
+                        <a href="log-in">Log in</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="#get-started-section" class="btn">Get started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-section">
+            <div class="container">
+                <div class="intro-info">
+                    <h1>Track your shows automatically</h1>
+                    <p class="font-bigger">With ShowTrackr you can track your favorite TV shows automatically, so you never loose track of your TV shows ever again. 🍿</p>
+                    <div class="email-wrapper">
+                        <div class="email-input">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" placeholder="your@email.com">
+                        </div>
+                        <input type="submit" class="btn" value="Start tracking">
+                    </div>
+                    
+                    <p class="font-icon">COMPATIBLE WITH</p>
+                    <div class="compatible-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="92.42" height="25" viewBox="0 0 1024 276.742">
+                            <path d="M140.803 258.904c-15.404 2.705-31.079 3.516-47.294 5.676l-49.458-144.856v151.073c-15.404 1.621-29.457 3.783-44.051 5.945v-276.742h41.08l56.212 157.021v-157.021h43.511v258.904zm85.131-157.558c16.757 0 42.431-.811 57.835-.811v43.24c-19.189 0-41.619 0-57.835.811v64.322c25.405-1.621 50.809-3.785 76.482-4.596v41.617l-119.724 9.461v-255.39h119.724v43.241h-76.482v58.105zm237.284-58.104h-44.862v198.908c-14.594 0-29.188 0-43.239.539v-199.447h-44.862v-43.242h132.965l-.002 43.242zm70.266 55.132h59.187v43.24h-59.187v98.104h-42.433v-239.718h120.808v43.241h-78.375v55.133zm148.641 103.507c24.594.539 49.456 2.434 73.51 3.783v42.701c-38.646-2.434-77.293-4.863-116.75-5.676v-242.689h43.24v201.881zm109.994 49.457c13.783.812 28.377 1.623 42.43 3.242v-254.58h-42.43v251.338zm231.881-251.338l-54.863 131.615 54.863 145.127c-16.217-2.162-32.432-5.135-48.648-7.838l-31.078-79.994-31.617 73.51c-15.678-2.705-30.812-3.516-46.484-5.678l55.672-126.75-50.269-129.992h46.482l28.377 72.699 30.27-72.699h47.295z" fill="#d81f26"/>
+                        </svg>
+                        <svg
+                            xmlns:dc="http://purl.org/dc/elements/1.1/"
+                            xmlns:cc="http://creativecommons.org/ns#"
+                            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                            xmlns:svg="http://www.w3.org/2000/svg"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                            width="30"
+                            viewBox="0 0 1000 1187.198"
+                            version="1.1"
+                            height="30"
+                            id="svg2"
+                            inkscape:version="0.91 r13725"
+                            sodipodi:docname="Apple_1998.svg">
+                            <metadata
+                                id="metadata10">
+                                <rdf:RDF>
+                                <cc:Work
+                                    rdf:about="">
+                                    <dc:format>image/svg+xml</dc:format>
+                                    <dc:type
+                                    rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                                    <dc:title></dc:title>
+                                </cc:Work>
+                                </rdf:RDF>
+                            </metadata>
+                            <defs
+                                id="defs8" />
+                            <sodipodi:namedview
+                                pagecolor="#ffffff"
+                                bordercolor="#666666"
+                                borderopacity="1"
+                                objecttolerance="10"
+                                gridtolerance="10"
+                                guidetolerance="10"
+                                inkscape:pageopacity="0"
+                                inkscape:pageshadow="2"
+                                inkscape:window-width="1366"
+                                inkscape:window-height="705"
+                                id="namedview6"
+                                showgrid="false"
+                                inkscape:zoom="0.1767767"
+                                inkscape:cx="-1066.5045"
+                                inkscape:cy="964.94669"
+                                inkscape:window-x="-8"
+                                inkscape:window-y="-8"
+                                inkscape:window-maximized="1"
+                                inkscape:current-layer="svg2" />
+                            <path
+                                d="m 979.04184,925.18785 c -17.95397,41.47737 -39.20563,79.65705 -63.82824,114.75895 -33.56298,47.8528 -61.04356,80.9761 -82.22194,99.3698 -32.83013,30.192 -68.00529,45.6544 -105.67203,46.5338 -27.04089,0 -59.6512,-7.6946 -97.61105,-23.3035 -38.08442,-15.5358 -73.08371,-23.2303 -105.08578,-23.2303 -33.56296,0 -69.55888,7.6945 -108.06101,23.2303 -38.5608,15.6089 -69.62484,23.7432 -93.37541,24.5493 -36.12049,1.5389 -72.1237,-14.3632 -108.06101,-47.7796 -22.93711,-20.0059 -51.62684,-54.3017 -85.99592,-102.8874 C 92.254176,984.54592 61.937588,924.38175 38.187028,855.7902 12.750995,781.70252 0,709.95986 0,640.50361 0,560.94181 17.191859,492.32094 51.626869,434.81688 78.689754,388.62753 114.69299,352.19192 159.75381,325.44413 c 45.06086,-26.74775 93.74914,-40.37812 146.18212,-41.25019 28.68971,0 66.3125,8.8744 113.06613,26.31542 46.62174,17.49964 76.55727,26.37404 89.68198,26.37404 9.8124,0 43.06758,-10.37669 99.4431,-31.06405 53.31237,-19.18512 98.30724,-27.12887 135.16787,-23.99975 99.8828,8.06098 174.92313,47.43518 224.82789,118.37174 -89.33023,54.12578 -133.51903,129.93556 -132.63966,227.18753 0.8061,75.75115 28.28668,138.78795 82.2952,188.8393 24.47603,23.23022 51.81008,41.18421 82.22186,53.93522 -6.59525,19.12648 -13.557,37.44688 -20.95846,55.03446 z M 749.96366,23.751237 c 0,59.37343 -21.69138,114.810233 -64.92748,166.121963 -52.17652,60.99961 -115.28658,96.24803 -183.72426,90.68597 -0.87204,-7.12298 -1.37769,-14.61967 -1.37769,-22.49743 0,-56.99843 24.81315,-117.99801 68.87738,-167.873453 21.99909,-25.25281 49.978,-46.25018 83.90738,-63.00018 C 686.57507,10.688027 718.59913,1.5631274 748.71783,5.2734376e-4 749.59727,7.9378274 749.96366,15.875627 749.96366,23.750467 Z"
+                                id="path4"
+                                inkscape:connector-curvature="0" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="-147 -70 294 345">
+                            <g fill="#a4c639">
+                                <use stroke-width="14.4" xlink:href="#b" stroke="#FFF"/>
+                                <use xlink:href="#a" transform="scale(-1,1)"/>
+                                <g id="a" stroke="#FFF" stroke-width="7.2">
+                                <rect rx="6.5" transform="rotate(29)" height="86" width="13" y="-86" x="14"/>
+                                <rect id="c" rx="24" height="133" width="48" y="41" x="-143"/>
+                                <use y="97" x="85" xlink:href="#c"/>
+                                </g>
+                                <g id="b">
+                                <ellipse cy="41" rx="91" ry="84"/>
+                                <rect rx="22" height="182" width="182" y="20" x="-91"/>
+                                </g>
+                            </g>
+                            <g stroke="#FFF" stroke-width="7.2" fill="#FFF">
+                            <path d="m-95 44.5h190"/><circle cx="-42" r="4"/><circle cx="42" r="4"/>
+                            </g>
+                        </svg>
+                        <svg
+                            xmlns:svg="http://www.w3.org/2000/svg"
+                            xmlns="http://www.w3.org/2000/svg"
+                            version="1.1"
+                            width="30"
+                            height="30"
+                            viewBox="-2.61977004 -2.61977004 92.56520808 92.83416708"
+                            id="svg8375">
+                            <defs
+                                id="defs8377" />
+                            <path
+                                d="M 0,12.40183 35.68737,7.5416 35.70297,41.96435 0.03321,42.16748 z m 35.67037,33.52906 0.0277,34.45332 -35.66989,-4.9041 -0.002,-29.77972 z M 39.99644,6.90595 87.31462,0 l 0,41.527 -47.31818,0.37565 z M 87.32567,46.25471 87.31457,87.59463 39.9964,80.91625 39.9301,46.17767 z"
+                                id="path13" />
+                        </svg>
+                        <svg
+                            xmlns:dc="http://purl.org/dc/elements/1.1/"
+                            xmlns:cc="http://creativecommons.org/ns#"
+                            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                            xmlns:svg="http://www.w3.org/2000/svg"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                            width="96.1"
+                            height="24.78"
+                            id="svg3104"
+                            version="1.1"
+                            inkscape:version="0.48.4 r9939"
+                            viewBox="0 0 350 60"
+                            sodipodi:docname="Synology.svg">
+                            <defs
+                                id="defs3106" />
+                            <sodipodi:namedview
+                                id="base"
+                                pagecolor="#ffffff"
+                                bordercolor="#666666"
+                                borderopacity="1.0"
+                                inkscape:pageopacity="0.0"
+                                inkscape:pageshadow="2"
+                                inkscape:zoom="1.4"
+                                inkscape:cx="145.98488"
+                                inkscape:cy="4.7574987"
+                                inkscape:document-units="px"
+                                inkscape:current-layer="layer1"
+                                showgrid="false"
+                                fit-margin-top="2"
+                                fit-margin-left="2"
+                                fit-margin-right="2"
+                                fit-margin-bottom="2"
+                                inkscape:window-width="1366"
+                                inkscape:window-height="706"
+                                inkscape:window-x="-8"
+                                inkscape:window-y="-8"
+                                inkscape:window-maximized="1" />
+                            <metadata
+                                id="metadata3109">
+                                <rdf:RDF>
+                                <cc:Work
+                                    rdf:about="">
+                                    <dc:format>image/svg+xml</dc:format>
+                                    <dc:type
+                                    rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                                    <dc:title></dc:title>
+                                </cc:Work>
+                                </rdf:RDF>
+                            </metadata>
+                            <g
+                                inkscape:label="Layer 1"
+                                inkscape:groupmode="layer"
+                                id="layer1"
+                                transform="translate(-311.04693,-470.39655)">
+                                <g
+                                transform="matrix(2.9861316,0,0,-2.9861316,195.28107,2130.6265)"
+                                id="g3051">
+                                <g
+                                    transform="translate(39.4376,541.665)"
+                                    id="g12">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path14"
+                                    style="fill:#a7a5a6;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="m 0,0 3.45,0.323 c 0.213,-1.158 0.635,-2.012 1.27,-2.558 0.638,-0.542 1.5,-0.812 2.583,-0.812 1.144,0 2.008,0.245 2.595,0.726 0.58,0.492 0.867,1.053 0.867,1.695 0,0.417 -0.123,0.78 -0.364,1.072 C 10.156,0.733 9.73,0.993 9.124,1.199 8.705,1.359 7.757,1.614 6.28,1.989 4.375,2.458 3.037,3.045 2.276,3.734 1.196,4.714 0.654,5.908 0.654,7.306 c 0,0.9 0.249,1.751 0.765,2.527 0.506,0.788 1.244,1.387 2.205,1.803 0.958,0.4 2.105,0.609 3.472,0.609 2.209,0 3.872,-0.489 4.994,-1.461 1.119,-0.99 1.702,-2.289 1.757,-3.919 L 10.275,6.745 C 10.117,7.635 9.801,8.291 9.295,8.693 8.799,9.092 8.048,9.292 7.054,9.292 6.023,9.292 5.213,9.08 4.633,8.648 4.253,8.37 4.066,8.013 4.066,7.557 4.066,7.132 4.24,6.782 4.594,6.483 5.039,6.097 6.132,5.704 7.86,5.3 9.592,4.888 10.868,4.462 11.694,4.021 12.522,3.58 13.173,2.979 13.641,2.212 c 0.464,-0.748 0.706,-1.704 0.706,-2.827 0,-1.012 -0.284,-1.97 -0.845,-2.851 -0.561,-0.881 -1.357,-1.547 -2.382,-1.98 -1.029,-0.421 -2.308,-0.646 -3.84,-0.646 -2.231,0 -3.949,0.521 -5.143,1.564 C 0.945,-3.491 0.232,-1.98 0,0" />
+                                </g>
+                                <g
+                                    transform="translate(53.3329,548.733)"
+                                    id="g16">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path18"
+                                    style="fill:#a7a5a6;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="M 0,0 3.582,0 6.642,-9.109 9.624,0 13.115,0 8.628,-12.336 7.806,-14.587 c -0.297,-0.751 -0.577,-1.32 -0.845,-1.714 -0.268,-0.402 -0.577,-0.726 -0.925,-0.967 -0.355,-0.239 -0.784,-0.432 -1.284,-0.569 -0.512,-0.139 -1.086,-0.216 -1.728,-0.216 -0.647,0 -1.286,0.077 -1.915,0.216 l -0.28,2.665 c 0.525,-0.111 1.002,-0.166 1.425,-0.166 0.78,0 1.361,0.23 1.734,0.689 0.377,0.472 0.665,1.068 0.864,1.782 L 0,0 z" />
+                                </g>
+                                <g
+                                    transform="translate(78.1938,535.901)"
+                                    id="g20">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path22"
+                                    style="fill:#a7a5a6;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="m 0,0 -3.373,0 0,6.532 c 0,1.376 -0.07,2.263 -0.219,2.673 -0.148,0.405 -0.377,0.721 -0.709,0.947 -0.326,0.223 -0.726,0.336 -1.183,0.336 -0.593,0 -1.119,-0.164 -1.593,-0.487 C -7.551,9.682 -7.87,9.259 -8.044,8.737 -8.215,8.201 -8.305,7.228 -8.305,5.791 l 0,-5.791 -3.366,0 0,12.832 3.118,0 0,-1.879 c 1.122,1.421 2.53,2.123 4.229,2.123 0.755,0 1.438,-0.138 2.061,-0.396 0.622,-0.278 1.096,-0.612 1.408,-1.035 0.317,-0.419 0.539,-0.893 0.665,-1.418 C -0.065,9.704 0,8.936 0,7.951 L 0,0 z" />
+                                </g>
+                                <g
+                                    transform="translate(81.6659,542.281)"
+                                    id="g24">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path26"
+                                    style="fill:#a7a5a6;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="M 0,0 C 0,-1.281 0.3,-2.26 0.909,-2.924 1.516,-3.609 2.26,-3.95 3.15,-3.95 c 0.89,0 1.635,0.341 2.241,1.026 0.596,0.664 0.896,1.654 0.896,2.94 0,1.268 -0.3,2.237 -0.896,2.908 C 4.785,3.595 4.04,3.943 3.15,3.943 2.26,3.943 1.516,3.595 0.909,2.924 0.3,2.253 0,1.273 0,0 m -3.453,0.171 c 0,1.138 0.281,2.218 0.835,3.279 0.554,1.051 1.341,1.857 2.36,2.417 1.019,0.557 2.157,0.828 3.411,0.828 1.944,0 3.531,-0.628 4.768,-1.888 1.241,-1.261 1.864,-2.854 1.864,-4.775 0,-1.941 -0.628,-3.543 -1.88,-4.822 -1.25,-1.272 -2.83,-1.919 -4.729,-1.919 -1.174,0 -2.293,0.271 -3.363,0.802 -1.067,0.532 -1.877,1.31 -2.431,2.341 -0.554,1.02 -0.835,2.267 -0.835,3.737" />
+                                </g>
+                                <g
+                                    transform="translate(95.59,555.312)"
+                                    id="g28">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path30"
+                                    style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="m 0,0 0,-16.567 c 0,-0.79 0.058,-1.313 0.169,-1.563 0.116,-0.262 0.289,-0.455 0.524,-0.586 0.239,-0.131 0.681,-0.199 1.319,-0.199 l 0,-0.496 -6.122,0 0,0.496 c 0.574,0 0.964,0.059 1.184,0.184 0.202,0.123 0.366,0.31 0.485,0.587 0.12,0.271 0.175,0.796 0.175,1.577 l 0,11.305 c 0,1.423 -0.029,2.293 -0.09,2.622 -0.058,0.326 -0.162,0.544 -0.297,0.66 -0.139,0.123 -0.312,0.191 -0.523,0.191 -0.228,0 -0.522,-0.084 -0.873,-0.223 L -4.282,-1.527 -0.605,0 0,0 z" />
+                                </g>
+                                <g
+                                    transform="translate(103.261,547.855)"
+                                    id="g32">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path34"
+                                    style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="m 0,0 c -0.484,0 -0.967,-0.125 -1.454,-0.419 -0.487,-0.289 -0.883,-0.783 -1.184,-1.493 -0.299,-0.724 -0.45,-1.64 -0.45,-2.764 0,-1.817 0.367,-3.366 1.085,-4.693 0.726,-1.304 1.677,-1.969 2.857,-1.969 0.89,0 1.615,0.372 2.183,1.09 0.577,0.724 0.865,1.969 0.865,3.742 0,2.216 -0.478,3.947 -1.433,5.22 C 1.822,-0.421 0.999,0 0,0 m 0.419,0.919 c 1.899,0 3.418,-0.719 4.568,-2.157 0.974,-1.225 1.461,-2.633 1.461,-4.223 0,-1.122 -0.264,-2.254 -0.803,-3.394 -0.539,-1.144 -1.277,-2.009 -2.225,-2.589 -0.944,-0.583 -1.989,-0.874 -3.146,-0.874 -1.892,0 -3.392,0.751 -4.501,2.246 -0.938,1.26 -1.409,2.68 -1.409,4.257 0,1.148 0.284,2.279 0.851,3.405 0.575,1.14 1.322,1.969 2.254,2.524 0.929,0.532 1.912,0.805 2.95,0.805" />
+                                </g>
+                                <g
+                                    transform="translate(114.826,548.085)"
+                                    id="g36">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path38"
+                                    style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="m 0,0 c -0.671,0 -1.225,-0.28 -1.681,-0.813 -0.45,-0.532 -0.673,-1.331 -0.673,-2.437 0,-1.424 0.306,-2.528 0.919,-3.318 0.473,-0.594 1.064,-0.891 1.783,-0.891 0.686,0 1.254,0.263 1.692,0.777 0.442,0.515 0.661,1.317 0.661,2.413 0,1.442 -0.306,2.56 -0.928,3.37 C 1.305,-0.31 0.718,0 0,0 m -2.489,-12.184 c -0.416,-0.45 -0.726,-0.883 -0.942,-1.29 -0.216,-0.38 -0.316,-0.753 -0.316,-1.078 0,-0.447 0.258,-0.82 0.784,-1.146 0.909,-0.555 2.221,-0.844 3.934,-0.844 1.63,0 2.829,0.289 3.61,0.863 0.78,0.568 1.164,1.176 1.164,1.825 0,0.461 -0.232,0.796 -0.697,0.996 -0.474,0.201 -1.408,0.317 -2.815,0.346 -2.046,0.061 -3.624,0.18 -4.722,0.328 m 0.112,4.581 c -0.76,0.387 -1.338,0.896 -1.75,1.563 -0.403,0.675 -0.607,1.407 -0.607,2.21 0,1.238 0.459,2.306 1.387,3.182 0.932,0.889 2.125,1.338 3.576,1.338 1.185,0 2.214,-0.28 3.084,-0.864 l 2.642,0 c 0.393,0 0.618,-0.013 0.686,-0.035 C 6.7,-0.239 6.74,-0.28 6.773,-0.325 6.825,-0.41 6.856,-0.555 6.856,-0.761 6.856,-0.999 6.831,-1.174 6.786,-1.257 6.758,-1.303 6.712,-1.345 6.641,-1.363 6.573,-1.39 6.348,-1.402 5.951,-1.402 l -1.628,0 c 0.516,-0.657 0.771,-1.497 0.771,-2.519 0,-1.16 -0.451,-2.162 -1.336,-2.985 -0.89,-0.829 -2.082,-1.248 -3.571,-1.248 -0.619,0 -1.249,0.091 -1.896,0.294 -0.38,-0.358 -0.639,-0.656 -0.767,-0.915 -0.139,-0.266 -0.207,-0.482 -0.207,-0.657 0,-0.167 0.074,-0.31 0.229,-0.463 0.145,-0.141 0.442,-0.248 0.877,-0.307 0.248,-0.047 0.89,-0.082 1.902,-0.111 1.866,-0.059 3.079,-0.13 3.627,-0.223 0.845,-0.117 1.522,-0.435 2.025,-0.936 0.503,-0.505 0.754,-1.122 0.754,-1.859 0,-1.013 -0.483,-1.978 -1.443,-2.87 -1.407,-1.313 -3.251,-1.971 -5.524,-1.971 -1.747,0 -3.224,0.385 -4.429,1.175 -0.681,0.455 -1.016,0.922 -1.016,1.416 0,0.209 0.049,0.432 0.142,0.65 0.151,0.342 0.464,0.79 0.934,1.391 0.062,0.086 0.52,0.573 1.361,1.465 -0.468,0.294 -0.802,0.542 -0.992,0.772 -0.195,0.223 -0.294,0.48 -0.294,0.759 0,0.324 0.125,0.695 0.38,1.12 0.258,0.435 0.851,1.047 1.773,1.821" />
+                                </g>
+                                <g
+                                    transform="translate(122.069,548.41)"
+                                    id="g40">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path42"
+                                    style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="m 0,0 5.845,0 0,-0.5 -0.283,0 c -0.413,0 -0.719,-0.096 -0.925,-0.265 -0.204,-0.183 -0.303,-0.403 -0.303,-0.66 0,-0.362 0.145,-0.849 0.451,-1.474 l 3.047,-6.322 2.789,6.907 c 0.154,0.38 0.232,0.744 0.232,1.121 0,0.162 -0.039,0.281 -0.096,0.361 -0.075,0.097 -0.188,0.183 -0.343,0.236 C 10.262,-0.535 9.986,-0.5 9.599,-0.5 l 0,0.5 4.043,0 0,-0.5 c -0.336,-0.035 -0.596,-0.112 -0.777,-0.219 -0.185,-0.113 -0.384,-0.312 -0.6,-0.605 -0.084,-0.132 -0.246,-0.475 -0.468,-1.049 l -5.064,-12.46 c -0.494,-1.215 -1.139,-2.123 -1.941,-2.742 -0.8,-0.624 -1.571,-0.922 -2.312,-0.922 -0.539,0 -0.98,0.144 -1.332,0.462 -0.345,0.305 -0.518,0.658 -0.518,1.063 0,0.378 0.124,0.673 0.376,0.91 0.251,0.241 0.603,0.348 1.039,0.348 0.303,0 0.719,-0.098 1.238,-0.291 0.364,-0.125 0.596,-0.205 0.69,-0.205 0.274,0 0.567,0.148 0.896,0.428 0.322,0.278 0.648,0.822 0.974,1.623 l 0.883,2.176 -4.498,9.4 C 2.091,-2.298 1.871,-1.95 1.574,-1.528 1.345,-1.213 1.158,-0.997 1.013,-0.88 0.803,-0.744 0.464,-0.612 0,-0.5 L 0,0 z" />
+                                </g>
+                                <g
+                                    transform="translate(136.017,550.631)"
+                                    id="g44">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path46"
+                                    style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    d="M 0,0 0.705,0 C 0.854,0 0.974,0.009 1.057,0.052 1.144,0.07 1.206,0.132 1.25,0.197 1.299,0.269 1.319,0.346 1.319,0.426 1.319,0.539 1.277,0.635 1.189,0.713 1.106,0.788 0.97,0.826 0.79,0.826 L 0,0.826 0,0 z m -0.329,-1.393 0,2.502 1.099,0 c 0.223,0 0.39,-0.028 0.51,-0.08 C 1.4,0.988 1.482,0.91 1.554,0.803 1.625,0.681 1.656,0.555 1.656,0.426 1.656,0.242 1.602,0.093 1.482,-0.023 1.373,-0.148 1.196,-0.229 0.957,-0.261 1.048,-0.303 1.112,-0.348 1.154,-0.384 1.25,-0.471 1.341,-0.58 1.425,-0.709 l 0.435,-0.684 -0.41,0 -0.332,0.517 C 1.022,-0.735 0.941,-0.612 0.879,-0.535 0.812,-0.45 0.764,-0.4 0.712,-0.357 0.666,-0.328 0.616,-0.316 0.564,-0.3 0.526,-0.289 0.461,-0.283 0.376,-0.283 l -0.376,0 0,-1.11 -0.329,0 z" />
+                                </g>
+                                <g
+                                    transform="translate(138.473,550.583)"
+                                    id="g48">
+                                    <path
+                                    inkscape:connector-curvature="0"
+                                    id="path50"
+                                    style="fill:none;stroke:#231f20;stroke-width:0.17900001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+                                    d="m 0,0 c 0,-0.999 -0.813,-1.821 -1.809,-1.821 -1.003,0 -1.815,0.822 -1.815,1.821 0,1.006 0.812,1.812 1.815,1.812 C -0.813,1.812 0,1.006 0,0 z" />
+                                </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>    
+                </div>
+                <div class="intro-img">
+                    <img src="images/iphone-x-mockup.png">
+                </div>      
+            </div>
+            <div class="intro-square intro-square-blue"></div>
+            <div class="intro-square intro-square-purple"></div>
+            <div class="intro-square intro-square-orange"></div>
+        </div>
+
+        <div id="features-section" class="features-section">
+            <div class="container">
+                <div class="features-info">
+                    <h2>Built and customized for your habits</h2>
+                    <p class="font-bigger">ShowTrackr’s built-in machine learning and context-aware features guarantee that all the notifications and recommendations are always delivered to you in the perfect moment.</p>
+                </div>
+                <div class="customized-items">
+                    <div class="customized-item customized-item-automated-tracking">
+                        <div class="customized-item-icon">
+                            <svg width="17px" height="20px" viewBox="0 0 17 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>Triangle</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-313.000000, -1295.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                        <g id="Features" transform="translate(170.000000, 915.000000)">
+                                            <g id="Group-9" transform="translate(0.000000, 365.000000)">
+                                                <g id="Group-8" transform="translate(125.000000, 0.000000)">
+                                                    <g id="play" transform="translate(18.000000, 15.000000)">
+                                                        <path d="M9.43156714,2.02304999 L18.3505943,16.9015735 C18.6532636,17.4064798 18.4815102,18.0565563 17.9669723,18.35356 C17.8008652,18.449441 17.6116552,18.5 17.418941,18.5 L-0.419113253,18.5 C-1.01607047,18.5 -1.5,18.0251291 -1.5,17.4393463 C-1.5,17.2502393 -1.44847651,17.0645712 -1.35076651,16.9015735 L7.56826063,2.02304999 C7.87093,1.5181436 8.53340733,1.3496053 9.0479452,1.64660903 C9.20635315,1.73804587 9.33838606,1.86760726 9.43156714,2.02304999 Z" id="Triangle" transform="translate(8.500000, 10.000000) rotate(90.000000) translate(-8.500000, -10.000000) "></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4>Automated tracking</h4>
+                        <p class="font-smaller">Track your favorite shows automatically without switching between apps.</p>
+                        <a href="#" class="learn-more">Learn more</a>
+                    </div>
+                    <div class="customized-item customized-item-machine-learning">
+                        <div class="customized-item-icon">
+                            <svg width="22px" height="26px" viewBox="0 0 22 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+                                <title>Shape</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-709.000000, -1292.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                        <g id="Features" transform="translate(170.000000, 915.000000)">
+                                            <g id="Group-9-Copy" transform="translate(400.000000, 365.000000)">
+                                                <g id="Group-8" transform="translate(125.000000, 0.000000)">
+                                                    <g id="machine-learning" transform="translate(14.000000, 12.000000)">
+                                                        <path d="M10.5540541,21.4183366 L10.5540541,18.737219 C9.4536702,18.5343872 8.6216216,17.5949465 8.6216216,16.4666667 C8.6216216,15.9990583 8.7645372,15.5638855 9.0102398,15.2001421 L6.6891892,13.5382649 L4.3681386,15.2001421 C4.6138411,15.5638855 4.7567568,15.9990583 4.7567568,16.4666667 C4.7567568,16.9376348 4.6117801,17.3756996 4.3628266,17.7410206 L9.6422663,21.7911171 C9.9109927,21.6092414 10.2201711,21.4798806 10.5540541,21.4183366 Z M11.4459459,21.4183366 C11.7798289,21.4798806 12.0890073,21.6092414 12.3577337,21.7911171 L17.6371734,17.7410206 C17.3882199,17.3756996 17.2432432,16.9376348 17.2432432,16.4666667 C17.2432432,15.9990583 17.3861589,15.5638855 17.6318614,15.2001421 L15.3108108,13.5382649 L12.9897602,15.2001421 C13.2354628,15.5638855 13.3783784,15.9990583 13.3783784,16.4666667 C13.3783784,17.5949465 12.5463298,18.5343872 11.4459459,18.737219 L11.4459459,21.4183366 Z M12.9844482,22.414535 C13.2334017,22.779856 13.3783784,23.2179207 13.3783784,23.6888889 C13.3783784,24.9652803 12.3135421,26 11,26 C9.6864579,26 8.6216216,24.9652803 8.6216216,23.6888889 C8.6216216,23.2179207 8.7665983,22.779856 9.0155518,22.414535 L3.7361121,18.3644385 C3.3511251,18.625 2.8831126,18.7777778 2.3783784,18.7777778 C1.0648363,18.7777778 0,17.7430581 0,16.4666667 C0,15.3383869 0.8320486,14.3989461 1.9324324,14.1961143 L1.9324324,11.8038857 C0.8320486,11.6010539 0,10.6616131 0,9.5333333 C0,8.2569419 1.0648363,7.2222222 2.3783784,7.2222222 C2.8831126,7.2222222 3.3511251,7.375 3.7361121,7.6355615 L9.0155518,3.585465 C8.7665983,3.220144 8.6216216,2.7820793 8.6216216,2.3111111 C8.6216216,1.0347197 9.6864579,0 11,0 C12.3135421,0 13.3783784,1.0347197 13.3783784,2.3111111 C13.3783784,2.7820793 13.2334017,3.220144 12.9844482,3.585465 L18.2638879,7.6355615 C18.6488749,7.375 19.1168874,7.2222222 19.6216216,7.2222222 C20.9351637,7.2222222 22,8.2569419 22,9.5333333 C22,10.6616131 21.1679514,11.6010539 20.0675676,11.8038857 L20.0675676,14.1961143 C21.1679514,14.3989461 22,15.3383869 22,16.4666667 C22,17.7430581 20.9351637,18.7777778 19.6216216,18.7777778 C19.1168874,18.7777778 18.6488749,18.625 18.2638879,18.3644385 L12.9844482,22.414535 Z M3.74131,14.5724228 L5.9374248,13 L3.74131,11.4275772 C3.4713755,11.6113082 3.1603622,11.7419444 2.8243243,11.8038857 L2.8243243,14.1961143 C3.1603622,14.2580556 3.4713755,14.3886918 3.74131,14.5724228 Z M4.3681386,10.7998579 L6.6891892,12.4617351 L9.0102398,10.7998579 C8.7645372,10.4361145 8.6216216,10.0009417 8.6216216,9.5333333 C8.6216216,8.4050535 9.4536702,7.4656128 10.5540541,7.262781 L10.5540541,4.5816634 C10.2201711,4.5201194 9.9109927,4.3907586 9.6422663,4.2088829 L4.3628266,8.2589794 C4.6117801,8.6243004 4.7567568,9.0623652 4.7567568,9.5333333 C4.7567568,10.0009417 4.6138411,10.4361145 4.3681386,10.7998579 Z M18.25869,14.5724228 C18.5286245,14.3886918 18.8396378,14.2580556 19.1756757,14.1961143 L19.1756757,11.8038857 C18.8396378,11.7419444 18.5286245,11.6113082 18.25869,11.4275772 L16.0625752,13 L18.25869,14.5724228 Z M17.6371734,8.2589794 L12.3577337,4.2088829 C12.0890073,4.3907586 11.7798289,4.5201194 11.4459459,4.5816634 L11.4459459,7.262781 C12.5463298,7.4656128 13.3783784,8.4050535 13.3783784,9.5333333 C13.3783784,10.0009417 13.2354628,10.4361145 12.9897602,10.7998579 L15.3108108,12.4617351 L17.6318614,10.7998579 C17.3861589,10.4361145 17.2432432,10.0009417 17.2432432,9.5333333 C17.2432432,9.0623652 17.3882199,8.6243004 17.6371734,8.2589794 Z M9.6370683,14.5724228 C10.0230373,14.309713 10.492992,14.1555556 11,14.1555556 C11.507008,14.1555556 11.9769627,14.309713 12.3629317,14.5724228 L14.5590464,13 L12.3629317,11.4275772 C11.9769627,11.690287 11.507008,11.8444444 11,11.8444444 C10.492992,11.8444444 10.0230373,11.690287 9.6370683,11.4275772 L7.4409536,13 L9.6370683,14.5724228 Z M11,10.9777778 C11.8209638,10.9777778 12.4864865,10.331078 12.4864865,9.5333333 C12.4864865,8.7355887 11.8209638,8.0888889 11,8.0888889 C10.1790362,8.0888889 9.5135135,8.7355887 9.5135135,9.5333333 C9.5135135,10.331078 10.1790362,10.9777778 11,10.9777778 Z M11,17.9111111 C11.8209638,17.9111111 12.4864865,17.2644113 12.4864865,16.4666667 C12.4864865,15.668922 11.8209638,15.0222222 11,15.0222222 C10.1790362,15.0222222 9.5135135,15.668922 9.5135135,16.4666667 C9.5135135,17.2644113 10.1790362,17.9111111 11,17.9111111 Z M19.6216216,10.9777778 C20.4425854,10.9777778 21.1081081,10.331078 21.1081081,9.5333333 C21.1081081,8.7355887 20.4425854,8.0888889 19.6216216,8.0888889 C18.8006578,8.0888889 18.1351351,8.7355887 18.1351351,9.5333333 C18.1351351,10.331078 18.8006578,10.9777778 19.6216216,10.9777778 Z M19.6216216,17.9111111 C20.4425854,17.9111111 21.1081081,17.2644113 21.1081081,16.4666667 C21.1081081,15.668922 20.4425854,15.0222222 19.6216216,15.0222222 C18.8006578,15.0222222 18.1351351,15.668922 18.1351351,16.4666667 C18.1351351,17.2644113 18.8006578,17.9111111 19.6216216,17.9111111 Z M2.3783784,10.9777778 C3.1993422,10.9777778 3.8648649,10.331078 3.8648649,9.5333333 C3.8648649,8.7355887 3.1993422,8.0888889 2.3783784,8.0888889 C1.5574146,8.0888889 0.8918919,8.7355887 0.8918919,9.5333333 C0.8918919,10.331078 1.5574146,10.9777778 2.3783784,10.9777778 Z M2.3783784,17.9111111 C3.1993422,17.9111111 3.8648649,17.2644113 3.8648649,16.4666667 C3.8648649,15.668922 3.1993422,15.0222222 2.3783784,15.0222222 C1.5574146,15.0222222 0.8918919,15.668922 0.8918919,16.4666667 C0.8918919,17.2644113 1.5574146,17.9111111 2.3783784,17.9111111 Z M11,25.1333333 C11.8209638,25.1333333 12.4864865,24.4866335 12.4864865,23.6888889 C12.4864865,22.8911443 11.8209638,22.2444444 11,22.2444444 C10.1790362,22.2444444 9.5135135,22.8911443 9.5135135,23.6888889 C9.5135135,24.4866335 10.1790362,25.1333333 11,25.1333333 Z M11,3.7555556 C11.8209638,3.7555556 12.4864865,3.1088557 12.4864865,2.3111111 C12.4864865,1.5133665 11.8209638,0.8666667 11,0.8666667 C10.1790362,0.8666667 9.5135135,1.5133665 9.5135135,2.3111111 C9.5135135,3.1088557 10.1790362,3.7555556 11,3.7555556 Z" id="Shape"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4>Machine learning</h4>
+                        <p class="font-smaller">Get recommendations like never before, which are truly customized for your taste.</p>
+                        <a href="#" class="learn-more">Learn more</a>
+                    </div>
+                    <div class="customized-item customized-item-smart-notifications">
+                        <div class="customized-item-icon">
+                            <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+                                <title>Icon</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-1110.000000, -1291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                        <g id="Features" transform="translate(170.000000, 915.000000)">
+                                            <g id="Group-9-Copy-2" transform="translate(800.000000, 365.000000)">
+                                                <g id="Group-8" transform="translate(125.000000, 0.000000)">
+                                                    <g id="smart-notifications" transform="translate(15.000000, 11.000000)">
+                                                        <path d="M12.5185594,3.2432432 C12.4163201,3.6618419 12.3527691,4.095609 12.3319103,4.5405405 L3.8920058,4.5405405 C2.4591444,4.5405405 1.2972973,5.7024689 1.2972973,7.1352491 L1.2972973,20.1079942 C1.2972973,21.5408556 2.4592256,22.7027027 3.8920058,22.7027027 L16.8647509,22.7027027 C18.2976124,22.7027027 19.4594595,21.5407744 19.4594595,20.1079942 L19.4594595,11.6680897 C19.904391,11.6472309 20.3381581,11.5836799 20.7567568,11.4814406 L20.7567568,20.1079942 C20.7567568,22.2570954 19.0142464,24 16.8647509,24 L3.8920058,24 C1.7429046,24 0,22.2574896 0,20.1079942 L0,7.1352491 C0,4.9861479 1.7425104,3.2432432 3.8920058,3.2432432 L12.5185594,3.2432432 Z M19.1351351,9.7297297 C16.4483445,9.7297297 14.2702703,7.5516555 14.2702703,4.8648649 C14.2702703,2.1780742 16.4483445,0 19.1351351,0 C21.8219258,0 24,2.1780742 24,4.8648649 C24,7.5516555 21.8219258,9.7297297 19.1351351,9.7297297 Z" id="Icon"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4>Smart notifications</h4>
+                        <p class="font-smaller">Receive smart notifications exactly at the right moments when you need them.</p>
+                        <a href="#" class="learn-more">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-slides">
+                <img src="images/rectangle-7-left.jpg">
+                <img src="images/stranger-things.jpg">
+                <img src="images/westworld.jpg">
+                <img src="images/house-of-cards.jpg">
+                <img src="images/game-of-thrones.jpg">
+                <img src="images/the-flash.jpg">
+                <img src="images/rectangle-7-right.jpg">
+            </div>
+        </div>
+
+        <div id="interface-section" class="interface-section">
+            <div class="container">
+                <div class="interface-intro">
+                    <h2>Easy-to-use interfaces on every platform</h2>
+                    <p>Since most of our features work in a completely automated way, you will mainly use our apps to discover new TV shows recommended for you and discuss the most interesting episodes with like-minded people.</p>
+                    <div class="interface-intro-btns">
+                        <a href="#" class="interface-intro-btn">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>dashboard</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-187.000000, -2436.000000)" fill="#540CFA" fill-rule="nonzero">
+                                        <g id="App-Showcase" transform="translate(170.000000, 2067.000000)">
+                                            <g id="Group-15" transform="translate(0.000000, 352.000000)">
+                                                <g id="Group-14">
+                                                    <g id="dashboard" transform="translate(17.000000, 17.000000)">
+                                                        <path d="M7.1428571,20 L18.5714286,20 C19.3571429,20 20,19.3571429 20,18.5714286 L20,7.1428571 L7.1428571,7.1428571 L7.1428571,20 Z M18.5714286,0 L1.4285714,0 C0.6428571,0 0,0.6428571 0,1.4285714 L0,5.7142857 L20,5.7142857 L20,1.4285714 C20,0.6428571 19.3571429,0 18.5714286,0 Z M0,18.5714286 C0,19.3571429 0.6428571,20 1.4285714,20 L5.7142857,20 L5.7142857,7.1428571 L0,7.1428571 L0,18.5714286 Z" id="Shape"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            Customized Dashboard
+                        </a>
+                        <a href="#" class="interface-intro-btn">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>night-mode</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-187.000000, -2510.000000)" fill-rule="nonzero">
+                                        <g id="App-Showcase" transform="translate(170.000000, 2067.000000)">
+                                            <g id="Group-15" transform="translate(0.000000, 352.000000)">
+                                                <g id="Group-11" transform="translate(17.000000, 90.000000)">
+                                                    <g id="night-mode" transform="translate(0.000000, 1.000000)">
+                                                        <g id="Page-1">
+                                                            <g id="Desktop-HD-Custom-Copy-30">
+                                                                <g id="Group-23">
+                                                                    <g id="Group-25">
+                                                                        <g id="Group-22">
+                                                                            <g id="Group-17">
+                                                                                <circle id="Oval" fill="#540CFA" cx="10" cy="10" r="10"></circle>
+                                                                                <path d="M17.6174455,12.2790287 C16.6035404,15.3784866 13.6882387,17.6174455 10.25,17.6174455 C5.96979319,17.6174455 2.5,14.1476523 2.5,9.8674455 C2.5,6.42920685 4.73895889,3.51390506 7.83841682,2.5 C6.99664927,3.65546252 6.5,5.07845468 6.5,6.6174455 C6.5,10.4834388 9.63400675,13.6174455 13.5,13.6174455 C15.0389908,13.6174455 16.461983,13.1207962 17.6174455,12.2790287 L17.6174455,12.2790287 Z" id="Icon" fill="#FFFFFF"></path>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            Automatic Day & Night Modes
+                        </a>
+                        <a href="#" class="interface-intro-btn">
+                            <svg width="20px" height="17px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>chat</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-187.000000, -2586.000000)" fill="#540CFA" fill-rule="nonzero">
+                                        <g id="App-Showcase" transform="translate(170.000000, 2067.000000)">
+                                            <g id="Group-15" transform="translate(0.000000, 352.000000)">
+                                                <g id="Group-12" transform="translate(17.000000, 164.000000)">
+                                                    <g id="chat" transform="translate(0.000000, 3.000000)">
+                                                        <g id="Desktop-HD-Custom-Copy-30">
+                                                            <g id="Group-23">
+                                                                <g id="Group-25">
+                                                                    <g id="Group-21">
+                                                                        <g id="Group-20">
+                                                                            <path d="M19.6765116,16.6340405 C18.6981395,15.4658649 18.9353488,13.8772838 19.167907,13.0192432 C19.3869767,12.4837432 19.5102326,11.9137838 19.5102326,11.3178649 C19.5102326,10.253527 19.1309302,9.26431081 18.4837209,8.43498649 C17.8534884,12.3052432 13.9693023,15.3020676 9.24674419,15.3758108 C10.3316279,16.1297838 11.7230233,16.5841892 13.2406977,16.5841892 C14.3502326,16.5841892 15.3888372,16.3399865 16.2916279,15.9156757 C17.6774419,16.8341351 19.4030233,16.9602568 19.4030233,16.9602568 C20.1490698,16.9597973 19.6765116,16.6340405 19.6765116,16.6340405 Z" id="Shape"></path>
+                                                                            <path d="M17.7734884,7.33366216 C17.7734884,3.33613514 13.8690698,0.0829324324 9.07093023,0.0829324324 C4.27209302,0.0829324324 0.368139535,3.33613514 0.368139535,7.33366216 C0.368139535,8.11474324 0.524651163,8.89674324 0.833953488,9.65531081 C1.19302326,10.9620135 1.54837209,13.3080135 0.182790698,15.1224189 C0.646511628,15.0732568 2.73023256,14.7964324 4.41418605,13.6817838 L4.6055814,13.5554324 L4.81348837,13.6526081 C6.11069767,14.2616216 7.5827907,14.5846216 9.07093023,14.5846216 C13.8690698,14.5846216 17.7734884,11.3311892 17.7734884,7.33366216 Z" id="Shape"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            Integrated Chat Platform
+                        </a>
+                    </div>
+                </div>
+                <div class="interface-img">
+                    <img src="images/iphone-x-mockup.png" class="interface-img-iphone">
+                    <img src="images/group-13.png" class="interface-img-web">
+                </div>
+            </div>
+        </div>
+
+        <div id="community-section" class="community-section">
+            <div class="container">
+                <div class="community-intro">
+                    <h2>We believe in the power of community</h2>
+                    <p>Our goal is to create a product and service that you’re satisfied with and use it every day. This is why we’re constantly working on our services to make it better every day and really listen to what our users has to say.</p>
+                    <a href="#" class="btn">Read more testimonials</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="get-started-section" class="get-started-section">
+            <div class="container">
+                <h2>Start tracking your TV shows for free</h2>
+                <p>In order to start tracking your TV shows, all you have to do is enter your email address. Everything else will be taken care of by us. All you have to do is sit back, relax and enjoy your TV shows.</p>
+                <div class="email-wrapper">
+                    <div class="email-input">
+                        <label for="email-get-started">Email</label>
+                        <input id="email-get-started" type="text" name="email" placeholder="your@email.com">
+                    </div>
+                    <input type="submit" class="btn" value="Start tracking">
+                </div>
+            </div>
+        </div>
+
+        <div id="footer" class="footer">
+            <div class="social">
+                <a href="#">
+                    <svg width="19px" height="16px" viewBox="0 0 19 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+                        <title>Shape</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop-HD" transform="translate(-663.000000, -4332.000000)" fill="#000000" fill-rule="nonzero">
+                                <g id="Footer-CTA" transform="translate(0.000000, 3692.000000)">
+                                    <g id="Group-35" transform="translate(663.000000, 640.000000)">
+                                        <path d="M16.761155,2.53000983 C17.5648119,2.02958609 18.1830095,1.23875581 18.473926,0.295060137 C17.7087881,0.765556682 16.8716575,1.09703911 15.9987113,1.27518223 C15.2619666,0.459874865 14.2316728,-0.00193271549 13.1537902,-6.04218499e-06 C11.0019777,-6.04218499e-06 9.25550891,1.80801293 9.25550891,4.03831511 C9.25550891,4.35522502 9.28993403,4.664096 9.35732969,4.95902445 C6.11724701,4.79033241 3.24565858,3.18317334 1.32270042,0.739336934 C0.986934276,1.33509742 0.795414237,2.02958609 0.795414237,2.76992181 C0.795414237,4.17045512 1.48331058,5.40681828 2.52903423,6.13120174 C1.90989857,6.11153799 1.30434286,5.9382942 0.76317099,5.62600488 L0.76317099,5.67750432 C0.76317099,7.63372904 2.10696286,9.26613539 3.88931137,9.63793616 C3.31527985,9.79899641 2.713411,9.82262074 2.12926646,9.70702076 C2.62552154,11.3117933 4.06555829,12.4791974 5.7705715,12.5131117 C4.43671928,13.5945998 2.75619155,14.2414828 0.929478264,14.2414828 C0.61886288,14.2411146 0.308524792,14.2222422 0,14.1849591 C1.7248925,15.3305074 3.77427813,15.999994 5.97542521,15.999994 C13.1453051,15.999994 17.0654052,9.84468753 17.0654052,4.50683433 C17.0654052,4.33223869 17.0654052,4.15764306 17.0532837,3.98430351 C17.8160684,3.41242506 18.4747953,2.70473174 18.9987878,1.89418027 C18.2884915,2.22062731 17.5338589,2.43494214 16.761155,2.53000983 Z" id="Shape"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>Shape</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop-HD" transform="translate(-712.000000, -4332.000000)" fill="#000000">
+                                <g id="Footer-CTA" transform="translate(0.000000, 3692.000000)">
+                                    <g id="Group-35" transform="translate(663.000000, 640.000000)">
+                                        <path d="M52,0 L62,0 C63.6568542,0 65,1.34314575 65,3 L65,13 C65,14.6568542 63.6568542,16 62,16 L52,16 C50.3431457,16 49,14.6568542 49,13 L49,3 L49,3 C49,1.34314575 50.3431457,0 52,0 L52,0 Z M60,10.4615385 L61.5555556,10.4615385 L62,8.3846154 L60,8.3846154 L60,7 C59.8945007,6.4134096 60.0596079,5.99253257 60.8888889,6.0769231 L62,6.0769231 L62,4 C61.8117941,4.05809766 61.1662545,4 60.4444444,4 C58.847054,4 57.7735002,4.99412139 57.7777778,6.7692308 L57.7777778,8.3846154 L56,8.3846154 L56,10.4615385 L57.7777778,10.4615385 L57.7777778,16 L60,16 L60,10.4615385 Z" id="Shape"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg width="22px" height="16px" viewBox="0 0 22 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>Shape</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Dribbble" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop-HD" transform="translate(-758.000000, -4332.000000)" fill="#000000">
+                                <g id="Footer-CTA" transform="translate(0.000000, 3692.000000)">
+                                    <g id="Group-35" transform="translate(663.000000, 640.000000)">
+                                        <path d="M103.555556,11.4293878 L103.555556,4.57175513 L109.666667,8.01200086 L103.555556,11.4293878 Z M116.78,3.45167512 C116.78,3.45167512 116.564889,1.88356311 115.906111,1.19322809 C115.068889,0.286877634 114.131444,0.283448818 113.701222,0.230873634 C110.623667,0 106.006111,0 106.006111,0 L105.996333,0 C105.996333,0 101.377556,0 98.3,0.230873634 C97.8685556,0.283448818 96.9311111,0.288020573 96.0938889,1.19322809 C95.4338889,1.88356311 95.22,3.45167512 95.22,3.45167512 C95.22,3.45167512 95,5.29180656 95,7.131938 L95,8.86006143 C95,10.7001929 95.22,12.5403243 95.22,12.5403243 C95.22,12.5403243 95.4338889,14.1095793 96.0938889,14.7999143 C96.9311111,15.7051218 98.0298889,15.6765483 98.52,15.7714122 C100.28,15.9462819 106,16 106,16 C106,16 110.622444,15.9931424 113.7,15.7622687 C114.131444,15.7096935 115.068889,15.7051218 115.906111,14.7987713 C116.566111,14.1072934 116.78,12.5391814 116.78,12.5391814 C116.78,12.5391814 117,10.6990499 117,8.85891849 L117,7.131938 C117,5.29180656 116.78,3.45167512 116.78,3.45167512 Z" id="Shape"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
