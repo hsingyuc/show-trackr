@@ -76,6 +76,10 @@ p {
     display: flex;
     flex-grow: 1;
 }
+.navbar-item {
+    align-items: center;
+    display: flex;
+}
 .navbar-menu .navbar-item {
     margin: 0 29px;
 }
@@ -327,7 +331,7 @@ p {
 /* community */
 .community-section {
     color: white;
-    background-image: url(testimonials.png);
+    background-image: url("images/testimonials.png");
     background-color: black;
     background-repeat: no-repeat;
     background-position-x: 725px;
@@ -389,19 +393,22 @@ p {
         position: fixed;
         right: 0;
         top: 50px;
-        height: 50%;
+        height: 100%;
         background: white;
         width: 260px;
         flex-direction: column;
-        transition: all .3s ease-in-out;
+        transition: transform .3s ease-in-out;
         transform: translateX(100%);
+        padding-top: 10px;
+        border-left: 1px solid rgba(0,0,0,.1);
+    }
+
+    .navbar-item a:not(.btn) {
+        line-height: 2.5;
     }
 
     .navbar-menu.is-open {
         transform: translateX(0%);
-        transition: all .3s ease-in-out;
-        padding-top: 10px;
-        line-height: 2.5;
     }
 
     .navbar-menu > .navbar-item:first-child {
